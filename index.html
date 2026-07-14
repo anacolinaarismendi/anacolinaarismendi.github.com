@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ana Colina Arismendi · Analista de datos</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #1557b0;
+      --primary-light: #e8f0fe;
+      --accent: #0d47a1;
+      --gray-50: #f8f9fa;
+      --gray-100: #f1f3f4;
+      --gray-200: #e8eaed;
+      --gray-400: #9aa0a6;
+      --gray-600: #5f6368;
+      --gray-800: #202124;
+      --gray-900: #171717;
+      --white: #ffffff;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+      --transition: .25s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--primary); text-decoration: none; transition: color var(--transition); }
+    a:hover, a:focus { color: var(--primary-dark); }
+
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+      color: var(--white);
+      padding: 64px 0 48px;
+      text-align: center;
+      position: relative;
+    }
+    .lang-selector {
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      z-index: 10;
+    }
+    .lang-selector select {
+      appearance: none;
+      background: rgba(255,255,255,.15);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 6px;
+      padding: 6px 28px 6px 12px;
+      font-size: .8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+    .lang-selector select:hover { background: rgba(255,255,255,.25); }
+    .lang-selector select:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+    .lang-selector option { color: var(--gray-800); background: var(--white); }
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+    header .title {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 300;
+      opacity: .9;
+      margin-top: 8px;
+    }
+    header .avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,.4);
+      margin-bottom: 16px;
+      object-fit: cover;
+      background: rgba(255,255,255,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Sections ── */
+    section { padding: 48px 0; }
+    section:nth-child(even) { background: var(--white); }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 32px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+      margin-top: 6px;
+    }
+
+    /* ── Profile ── */
+    .profile-text {
+      max-width: 720px;
+      font-size: 1.05rem;
+      color: var(--gray-600);
+      line-height: 1.8;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: var(--gray-200);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -25px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .timeline-item h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+    .timeline-item .meta {
+      font-size: .875rem;
+      color: var(--primary);
+      font-weight: 500;
+      margin: 2px 0 8px;
+    }
+    .timeline-item p {
+      color: var(--gray-600);
+      font-size: .95rem;
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 40px;
+    }
+    .skill-item { }
+    .skill-item .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: .925rem;
+    }
+    .skill-item .skill-name { font-weight: 500; color: var(--gray-800); }
+    .skill-item .skill-pct { color: var(--gray-400); font-weight: 600; }
+    .skill-bar {
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      width: 0;
+      transition: width .8s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ── Projects ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .project-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+    .project-card p {
+      font-size: .9rem;
+      color: var(--gray-600);
+      margin-bottom: 12px;
+    }
+    .project-card .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .project-card .tag {
+      font-size: .75rem;
+      padding: 2px 10px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    /* ── More repos ── */
+    .repos-section {
+      margin-top: 48px;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 32px;
+    }
+    .repos-section.hidden { display: none; }
+    .repos-heading {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      margin-bottom: 20px;
+    }
+    .repos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+    }
+    .repo-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .repo-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .repo-card a {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .repo-card a:hover { color: var(--primary); }
+    .repo-card .repo-desc {
+      font-size: .825rem;
+      color: var(--gray-600);
+      line-height: 1.5;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .repo-card .repo-meta {
+      display: flex;
+      gap: 14px;
+      font-size: .775rem;
+      color: var(--gray-400);
+    }
+    .repo-card .repo-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .repo-card .repo-lang {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .repo-card .repo-lang::before {
+      content: '';
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gray-400);
+      flex-shrink: 0;
+    }
+
+    /* ── Contact ── */
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--gray-800);
+      transition: all var(--transition);
+    }
+    .contact-links a:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+    .contact-links svg {
+      width: 20px; height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px 0;
+      font-size: .85rem;
+      color: var(--gray-400);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      header { padding: 48px 0 32px; }
+      section { padding: 32px 0; }
+      .container { padding: 0 16px; }
+      .skills-grid { grid-template-columns: 1fr; gap: 16px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-links { flex-direction: column; }
+      .contact-links a { width: 100%; justify-content: center; }
+      .timeline { padding-left: 24px; }
+      .timeline-item::before { left: -17px; }
+    }
+
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── Accessibility ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .skill-bar-fill { transition: none; }
+    }
+    :focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+  </style>
+</head>
+<body>
+
+<a class="sr-only" href="#perfil">Saltar al contenido principal</a>
+
+<!-- ═══ HEADER ═══ -->
+<header role="banner">
+  <div class="container">
+    <div class="lang-selector">
+      <label for="lang-switcher" class="sr-only">Idioma / Language</label>
+      <select id="lang-switcher" aria-label="Idioma / Language">
+        <option value="es">🇪🇸 Español</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="it">🇮🇹 Italiano</option>
+      </select>
+    </div>
+    <img src="ChatGPT%20Image%2017%20jun%202026%2C%2010_37_46.png" alt="Ana Colina Arismendi" class="avatar" width="100" height="100">
+    <h1>Ana Colina Arismendi</h1>
+    <p class="title" data-i18n="header-subtitle">Analista de datos</p>
+  </div>
+</header>
+
+<!-- ═══ PERFIL PROFESIONAL ═══ -->
+<section id="perfil" aria-labelledby="perfil-title">
+  <div class="container">
+    <h2 id="perfil-title" class="section-title" data-i18n="perfil-title">Perfil Profesional</h2>
+    <p class="profile-text" data-i18n="perfil-text">
+      Profesional internacional del sector salud y farmacéutico con sede en Frankfurt, especializada
+      en gestión comercial, análisis de mercado y key account management (KAM). Sólida formación
+      biomédica orientada a procesos de farmacovigilancia, fidelización de clientes y atención
+      personalizada. Actualmente profundizando en Ciencia de Datos Aplicada —con Python y SQL—
+      para impulsar decisiones estratégicas basadas en datos dentro del ecosistema biotecnológico
+      europeo.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCIA ═══ -->
+<section aria-labelledby="exp-title">
+  <div class="container">
+    <h2 id="exp-title" class="section-title" data-i18n="exp-title">Experiencia Laboral</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <h3 data-i18n="exp-1-title">Specialized Medical Sales Representative</h3>
+        <div class="meta" data-i18n="exp-1-meta">Laboratorios Pellier · Ene 2015 — Oct 2017</div>
+        <p data-i18n="exp-1-desc">Gestión de cuentas clave (KAM): planificación estratégica, prospección comercial y construcción de relaciones de confianza con especialistas en Cirugía Plástica, Pediatría y Neurología. Colaboración técnica con neurólogos para el monitoreo de seguridad y farmacovigilancia de Blastoferon (tratamiento para Esclerosis Múltiple). Lideré programas de formación personalizada para pacientes sobre manejo de kits de medicamentos biológicos. Gestión, análisis e integración de datos transaccionales de clientes clave en plataformas CRM para mitigar riesgo comercial.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3 data-i18n="exp-2-title">Professional Medical Representative</h3>
+        <div class="meta" data-i18n="exp-2-meta">Universidad Católica del Uruguay · Mar 2017 — Nov 2017</div>
+        <p data-i18n="exp-2-desc">Representación médica especializada en el sector farmacéutico, estableciendo vínculos entre la institución académica y la industria para la formación de profesionales en visitación médica y gestión comercial.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EDUCACIÓN ═══ -->
+<section aria-labelledby="edu-title">
+  <div class="container">
+    <h2 id="edu-title" class="section-title" data-i18n="edu-title">Educación</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <h3>Applied Data Science <span data-i18n="edu-1-status" style="font-weight:400;color:var(--gray-400);font-size:.85rem;">(en curso)</span></h3>
+        <div class="meta" data-i18n="edu-1-meta">Universitat Oberta de Catalunya (UOC)</div>
+        <p data-i18n="edu-1-desc">Especialización en programación analítica y manipulación de bases de datos con Python y SQL.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3 data-i18n="edu-2-title">Professional Medical Representative</h3>
+        <div class="meta" data-i18n="edu-2-meta">Universidad Católica del Uruguay (UCU) · Mar 2017 — Nov 2017</div>
+        <p data-i18n="edu-2-desc">Formación en representación médica, marketing farmacéutico y gestión comercial.</p>
+      </div>
+
+      <div class="timeline-item">
+        <h3 data-i18n="edu-3-title">Bachelor of Medicine (Coursework)</h3>
+        <div class="meta" data-i18n="edu-3-meta">Universidad de la República (UdelaR) · 2012 — 2017</div>
+        <p data-i18n="edu-3-desc">Formación en ciencias biomédicas con enfoque en farmacovigilancia y atención al paciente.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HABILIDADES ═══ -->
+<section aria-labelledby="skills-title">
+  <div class="container">
+    <h2 id="skills-title" class="section-title" data-i18n="skills-title">Habilidades</h2>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="skill-python">Python</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="55"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="skill-sql">SQL</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="50"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="skill-pharmacovigilance">Farmacovigilancia</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="skill-kam">Key Account Management</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="skill-data-analysis">Análisis de Datos</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="skill-crm">CRM &amp; Prospección</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="skill-communication">Comunicación Global</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="skill-planning">Planificación Operativa</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IDIOMAS ═══ -->
+<section aria-labelledby="lang-title">
+  <div class="container">
+    <h2 id="lang-title" class="section-title" data-i18n="lang-title">Idiomas</h2>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="lang-es">Español</span>
+          <span class="skill-pct" data-i18n="lang-es-level">Nativo</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="100"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="lang-en">Inglés</span>
+          <span class="skill-pct" data-i18n="lang-en-level">Fluido</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name" data-i18n="lang-de">Alemán</span>
+          <span class="skill-pct" data-i18n="lang-de-level">Básico (A1–A2)</span>
+        </div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="30"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ESPECIALIZACIONES ═══ -->
+<section aria-labelledby="spec-title">
+  <div class="container">
+    <h2 id="spec-title" class="section-title" data-i18n="spec-title">Especializaciones y Cursos</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <h3>Pharmaceutical Sales &amp; Marketing</h3>
+        <div class="meta">Universidad Católica del Uruguay · 2016 — 2022</div>
+      </div>
+
+      <div class="timeline-item">
+        <h3>Commercial Management Seminar</h3>
+        <div class="meta">Universidad Católica del Uruguay · 2016 — 2022</div>
+      </div>
+
+      <div class="timeline-item">
+        <h3>Biotechnological Medicines</h3>
+        <div class="meta">Laboratorios Biosidus · 2016</div>
+      </div>
+
+      <div class="timeline-item">
+        <h3>Wound Care Training</h3>
+        <div class="meta">Congreso Ibero-Latinoamericano de Cirugía Plástica · 2016</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROYECTOS ═══ -->
+<section aria-labelledby="proj-title">
+  <div class="container">
+    <h2 id="proj-title" class="section-title" data-i18n="proj-title">Proyectos</h2>
+    <div class="projects-grid">
+
+      <article class="project-card">
+        <h3><a href="https://github.com/anacolinaarismendi/Cardiovascular-Disease" target="_blank" rel="noopener" style="color:inherit;" data-i18n="proj-1-title">Predicción de Riesgo Cardiovascular</a></h3>
+        <p data-i18n="proj-1-desc">Modelo de machine learning para predecir enfermedad cardiovascular a partir de variables clínicas y de estilo de vida. Dashboard interactivo con Streamlit desplegado desde GitHub.</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Streamlit</span>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <h3><a href="https://github.com/anacolinaarismendi/api/blob/main/apis_python.ipynb" target="_blank" rel="noopener" style="color:inherit;" data-i18n="proj-2-title">Consumo de APIs con Python</a></h3>
+        <p data-i18n="proj-2-desc">Notebook interactivo que consume la API de terremotos de USGS, procesa datos GeoJSON en pandas DataFrames, realiza análisis exploratorio y visualizaciones. Incluye cliente API propio y manejo de errores.</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">API</span>
+          <span class="tag">pandas</span>
+        </div>
+      </article>
+
+    </div>
+
+    <div id="more-repos" class="repos-section">
+      <h3 class="repos-heading" data-i18n="repos-heading">Más repositorios</h3>
+      <div class="repos-grid" id="repos-grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACTO ═══ -->
+<section aria-labelledby="contact-title">
+  <div class="container">
+    <h2 id="contact-title" class="section-title" data-i18n="contact-title">Contacto</h2>
+    <div class="contact-links">
+      <a href="mailto:acolinaarismendi@gmail.com" aria-label="Enviar correo a Ana Colina">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        acolinaarismendi@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/ana-colina-arismendi-24a27715a/" target="_blank" rel="noopener" aria-label="Perfil de LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        linkedin.com/in/anacolina
+      </a>
+      <a href="https://github.com/anacolina" target="_blank" rel="noopener" aria-label="Perfil de GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        github.com/anacolina
+      </a>
+      <a href="#" style="cursor:default;border-color:transparent;background:var(--primary-light);color:var(--primary);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Frankfurt am Main, <span data-i18n="contact-location">Alemania</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    &copy; 2026 Ana Colina Arismendi &middot; <span data-i18n="footer-text">Hecho con &#9829;</span>
+  </div>
+</footer>
+
+<!-- ═══ JS ═══ -->
+<script>
+  (function() {
+    'use strict';
+
+    // ── Skill bars animation on scroll ──
+    const skillFills = document.querySelectorAll('.skill-bar-fill');
+
+    function animateSkills() {
+      skillFills.forEach(function(el) {
+        const rect = el.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight - 60;
+        if (isVisible && !el.classList.contains('animated')) {
+          el.classList.add('animated');
+          el.style.width = el.dataset.width + '%';
+        }
+      });
+    }
+
+    // Intersection Observer fallback for modern browsers
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            if (!el.classList.contains('animated')) {
+              el.classList.add('animated');
+              el.style.width = el.dataset.width + '%';
+            }
+            observer.unobserve(el);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      skillFills.forEach(function(el) { observer.observe(el); });
+    } else {
+      // fallback
+      window.addEventListener('scroll', animateSkills);
+      animateSkills();
+    }
+
+<script>
+  (function() {
+    'use strict';
+
+    // ── Translations ──
+    var t = {
+      es: {
+        'header-subtitle': 'Analista de datos',
+        'perfil-title': 'Perfil Profesional',
+        'perfil-text': 'Profesional internacional del sector salud y farmacéutico con sede en Frankfurt, especializada en gestión comercial, análisis de mercado y key account management (KAM). Sólida formación biomédica orientada a procesos de farmacovigilancia, fidelización de clientes y atención personalizada. Actualmente profundizando en Ciencia de Datos Aplicada —con Python y SQL— para impulsar decisiones estratégicas basadas en datos dentro del ecosistema biotecnológico europeo.',
+        'exp-title': 'Experiencia Laboral',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Ene 2015 — Oct 2017',
+        'exp-1-desc': 'Gestión de cuentas clave (KAM): planificación estratégica, prospección comercial y construcción de relaciones de confianza con especialistas en Cirugía Plástica, Pediatría y Neurología. Colaboración técnica con neurólogos para el monitoreo de seguridad y farmacovigilancia de Blastoferon (tratamiento para Esclerosis Múltiple). Lideré programas de formación personalizada para pacientes sobre manejo de kits de medicamentos biológicos. Gestión, análisis e integración de datos transaccionales de clientes clave en plataformas CRM para mitigar riesgo comercial.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mar 2017 — Nov 2017',
+        'exp-2-desc': 'Representación médica especializada en el sector farmacéutico, estableciendo vínculos entre la institución académica y la industria para la formación de profesionales en visitación médica y gestión comercial.',
+        'edu-title': 'Educación',
+        'edu-1-status': '(en curso)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Especialización en programación analítica y manipulación de bases de datos con Python y SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mar 2017 — Nov 2017',
+        'edu-2-desc': 'Formación en representación médica, marketing farmacéutico y gestión comercial.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Formación en ciencias biomédicas con enfoque en farmacovigilancia y atención al paciente.',
+        'skills-title': 'Habilidades',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Farmacovigilancia',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Análisis de Datos',
+        'skill-crm': 'CRM & Prospección',
+        'skill-communication': 'Comunicación Global',
+        'skill-planning': 'Planificación Operativa',
+        'lang-title': 'Idiomas',
+        'lang-es': 'Español',
+        'lang-es-level': 'Nativo',
+        'lang-en': 'Inglés',
+        'lang-en-level': 'Fluido',
+        'lang-de': 'Alemán',
+        'lang-de-level': 'Básico (A1–A2)',
+        'spec-title': 'Especializaciones y Cursos',
+        'proj-title': 'Proyectos',
+        'proj-1-title': 'Predicción de Riesgo Cardiovascular',
+        'proj-1-desc': 'Modelo de machine learning para predecir enfermedad cardiovascular a partir de variables clínicas y de estilo de vida. Dashboard interactivo con Streamlit desplegado desde GitHub.',
+        'proj-2-title': 'Consumo de APIs con Python',
+        'proj-2-desc': 'Notebook interactivo que consume la API de terremotos de USGS, procesa datos GeoJSON en pandas DataFrames, realiza análisis exploratorio y visualizaciones. Incluye cliente API propio y manejo de errores.',
+        'contact-title': 'Contacto',
+        'contact-location': 'Alemania',
+        'footer-text': 'Hecho con ♥',
+        'repos-heading': 'Más repositorios'
+      },
+      en: {
+        'header-subtitle': 'Data Analyst',
+        'perfil-title': 'Professional Profile',
+        'perfil-text': 'International health and pharmaceutical professional based in Frankfurt, specializing in commercial management, market analysis and key account management (KAM). Solid biomedical background focused on pharmacovigilance processes, customer loyalty and personalized care. Currently deepening skills in Applied Data Science — with Python and SQL — to drive data-led strategic decisions within the European biotechnology ecosystem.',
+        'exp-title': 'Work Experience',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Jan 2015 — Oct 2017',
+        'exp-1-desc': 'Key Account Management: strategic planning, business prospecting and building trust-based relationships with specialists in Plastic Surgery, Paediatrics and Neurology. Technical collaboration with neurologists for safety monitoring and pharmacovigilance of Blastoferon (Multiple Sclerosis treatment). Led personalized patient training programmes for correct handling of biological medication kits. Managed, analysed and integrated transactional data from key clients into CRM platforms to mitigate commercial risk.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mar 2017 — Nov 2017',
+        'exp-2-desc': 'Specialized medical representation in the pharmaceutical sector, establishing links between the academic institution and the industry for training professionals in medical visitation and commercial management.',
+        'edu-title': 'Education',
+        'edu-1-status': '(in progress)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Specialization in analytical programming and database manipulation using Python and SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mar 2017 — Nov 2017',
+        'edu-2-desc': 'Training in medical representation, pharmaceutical marketing and commercial management.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Training in biomedical sciences with focus on pharmacovigilance and patient care.',
+        'skills-title': 'Skills',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Pharmacovigilance',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Data Analysis',
+        'skill-crm': 'CRM & Prospecting',
+        'skill-communication': 'Global Communication',
+        'skill-planning': 'Operational Planning',
+        'lang-title': 'Languages',
+        'lang-es': 'Spanish',
+        'lang-es-level': 'Native',
+        'lang-en': 'English',
+        'lang-en-level': 'Fluent',
+        'lang-de': 'German',
+        'lang-de-level': 'Basic (A1–A2)',
+        'spec-title': 'Specializations & Courses',
+        'proj-title': 'Projects',
+        'proj-1-title': 'Cardiovascular Risk Prediction',
+        'proj-1-desc': 'Machine learning model to predict cardiovascular disease from clinical and lifestyle variables. Interactive dashboard with Streamlit deployed from GitHub.',
+        'proj-2-title': 'API Consumption with Python',
+        'proj-2-desc': 'Interactive notebook consuming the USGS Earthquake API, processing GeoJSON data into pandas DataFrames, with exploratory analysis and visualizations. Includes custom API client and error handling.',
+        'contact-title': 'Contact',
+        'contact-location': 'Germany',
+        'footer-text': 'Made with ♥',
+        'repos-heading': 'More repositories'
+      },
+      de: {
+        'header-subtitle': 'Datenanalystin',
+        'perfil-title': 'Berufliches Profil',
+        'perfil-text': 'Internationale Gesundheits- und Pharmafachkraft mit Sitz in Frankfurt, spezialisiert auf kommerzielles Management, Marktanalyse und Key Account Management (KAM). Solide biomedizinische Grundlage mit Fokus auf Pharmakovigilanz, Kundenbindung und personalisierte Betreuung. Derzeit Vertiefung in Angewandter Datenwissenschaft — mit Python und SQL — um datengestützte strategische Entscheidungen im europäischen Biotechnologie-Ökosystem voranzutreiben.',
+        'exp-title': 'Berufserfahrung',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Jan 2015 — Okt 2017',
+        'exp-1-desc': 'Key Account Management: strategische Planung, Geschäftsakquise und Aufbau vertrauensvoller Beziehungen zu Fachärzten für Plastische Chirurgie, Pädiatrie und Neurologie. Technische Zusammenarbeit mit Neurologen zur Sicherheitsüberwachung und Pharmakovigilanz von Blastoferon (Multiple-Sklerose-Behandlung). Leitung personalisierter Patientenschulungsprogramme für den korrekten Umgang mit biologischen Medikamentenkits. Verwaltung, Analyse und Integration von Transaktionsdaten wichtiger Kunden in CRM-Plattformen zur Minderung kommerzieller Risiken.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mär 2017 — Nov 2017',
+        'exp-2-desc': 'Spezialisierte medizinische Vertretung im Pharmasektor, die Verbindungen zwischen der akademischen Einrichtung und der Industrie zur Ausbildung von Fachkräften in medizinischer Visitation und kommerziellem Management herstellt.',
+        'edu-title': 'Bildung',
+        'edu-1-status': '(in Bearbeitung)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Spezialisierung in analytischer Programmierung und Datenbankmanipulation mit Python und SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mär 2017 — Nov 2017',
+        'edu-2-desc': 'Ausbildung in medizinischer Vertretung, Pharmamarketing und kommerziellem Management.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Ausbildung in biomedizinischen Wissenschaften mit Schwerpunkt auf Pharmakovigilanz und Patientenversorgung.',
+        'skills-title': 'Fähigkeiten',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Pharmakovigilanz',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Datenanalyse',
+        'skill-crm': 'CRM & Prospektion',
+        'skill-communication': 'Globale Kommunikation',
+        'skill-planning': 'Operative Planung',
+        'lang-title': 'Sprachen',
+        'lang-es': 'Spanisch',
+        'lang-es-level': 'Muttersprache',
+        'lang-en': 'Englisch',
+        'lang-en-level': 'Fließend',
+        'lang-de': 'Deutsch',
+        'lang-de-level': 'Grundkenntnisse (A1–A2)',
+        'spec-title': 'Spezialisierungen & Kurse',
+        'proj-title': 'Projekte',
+        'proj-1-title': 'Cardiovascular Risk Prediction',
+        'proj-1-desc': 'Machine learning model to predict cardiovascular disease from clinical and lifestyle variables. Interactive dashboard with Streamlit deployed from GitHub.',
+        'proj-2-title': 'API Consumption with Python',
+        'proj-2-desc': 'Interactive notebook consuming the USGS Earthquake API, processing GeoJSON data into pandas DataFrames, with exploratory analysis and visualizations. Includes custom API client and error handling.',
+        'contact-title': 'Contact',
+        'contact-location': 'Germany',
+        'footer-text': 'Made with ♥',
+        'repos-heading': 'More repositories'
+      },
+      de: {
+        'header-subtitle': 'Datenanalystin',
+        'perfil-title': 'Berufliches Profil',
+        'perfil-text': 'Internationale Gesundheits- und Pharmafachkraft mit Sitz in Frankfurt, spezialisiert auf kommerzielles Management, Marktanalyse und Key Account Management (KAM). Solide biomedizinische Grundlage mit Fokus auf Pharmakovigilanz, Kundenbindung und personalisierte Betreuung. Derzeit Vertiefung in Angewandter Datenwissenschaft — mit Python und SQL — um datengestützte strategische Entscheidungen im europäischen Biotechnologie-Ökosystem voranzutreiben.',
+        'exp-title': 'Berufserfahrung',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Jan 2015 — Okt 2017',
+        'exp-1-desc': 'Key Account Management: strategische Planung, Geschäftsakquise und Aufbau vertrauensvoller Beziehungen zu Fachärzten für Plastische Chirurgie, Pädiatrie und Neurologie. Technische Zusammenarbeit mit Neurologen zur Sicherheitsüberwachung und Pharmakovigilanz von Blastoferon (Multiple-Sklerose-Behandlung). Leitung personalisierter Patientenschulungsprogramme für den korrekten Umgang mit biologischen Medikamentenkits. Verwaltung, Analyse und Integration von Transaktionsdaten wichtiger Kunden in CRM-Plattformen zur Minderung kommerzieller Risiken.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mär 2017 — Nov 2017',
+        'exp-2-desc': 'Spezialisierte medizinische Vertretung im Pharmasektor, die Verbindungen zwischen der akademischen Einrichtung und der Industrie zur Ausbildung von Fachkräften in medizinischer Visitation und kommerziellem Management herstellt.',
+        'edu-title': 'Bildung',
+        'edu-1-status': '(in Bearbeitung)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Spezialisierung in analytischer Programmierung und Datenbankmanipulation mit Python und SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mär 2017 — Nov 2017',
+        'edu-2-desc': 'Ausbildung in medizinischer Vertretung, Pharmamarketing und kommerziellem Management.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Ausbildung in biomedizinischen Wissenschaften mit Schwerpunkt auf Pharmakovigilanz und Patientenversorgung.',
+        'skills-title': 'Fähigkeiten',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Pharmakovigilanz',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Datenanalyse',
+        'skill-crm': 'CRM & Prospektion',
+        'skill-communication': 'Globale Kommunikation',
+        'skill-planning': 'Operative Planung',
+        'lang-title': 'Sprachen',
+        'lang-es': 'Spanisch',
+        'lang-es-level': 'Muttersprache',
+        'lang-en': 'Englisch',
+        'lang-en-level': 'Fließend',
+        'lang-de': 'Deutsch',
+        'lang-de-level': 'Grundkenntnisse (A1–A2)',
+        'spec-title': 'Spezialisierungen & Kurse',
+        'proj-title': 'Projekte',
+        'proj-1-title': 'Cardiovascular Risk Prediction',
+        'proj-1-desc': 'Machine learning model to predict cardiovascular disease from clinical and lifestyle variables. Interactive dashboard with Streamlit deployed from GitHub.',
+        'proj-2-title': 'API Consumption with Python',
+        'proj-2-desc': 'Interactive notebook consuming the USGS Earthquake API, processing GeoJSON data into pandas DataFrames, with exploratory analysis and visualizations. Includes custom API client and error handling.',
+        'contact-title': 'Contact',
+        'contact-location': 'Germany',
+        'footer-text': 'Made with ♥',
+        'repos-heading': 'More repositories'
+      },
+      de: {
+        'header-subtitle': 'Datenanalystin',
+        'perfil-title': 'Berufliches Profil',
+        'perfil-text': 'Internationale Gesundheits- und Pharmafachkraft mit Sitz in Frankfurt, spezialisiert auf kommerzielles Management, Marktanalyse und Key Account Management (KAM). Solide biomedizinische Grundlage mit Fokus auf Pharmakovigilanz, Kundenbindung und personalisierte Betreuung. Derzeit Vertiefung in Angewandter Datenwissenschaft — mit Python und SQL — um datengestützte strategische Entscheidungen im europäischen Biotechnologie-Ökosystem voranzutreiben.',
+        'exp-title': 'Berufserfahrung',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Jan 2015 — Okt 2017',
+        'exp-1-desc': 'Key Account Management: strategische Planung, Geschäftsakquise und Aufbau vertrauensvoller Beziehungen zu Fachärzten für Plastische Chirurgie, Pädiatrie und Neurologie. Technische Zusammenarbeit mit Neurologen zur Sicherheitsüberwachung und Pharmakovigilanz von Blastoferon (Multiple-Sklerose-Behandlung). Leitung personalisierter Patientenschulungsprogramme für den korrekten Umgang mit biologischen Medikamentenkits. Verwaltung, Analyse und Integration von Transaktionsdaten wichtiger Kunden in CRM-Plattformen zur Minderung kommerzieller Risiken.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mär 2017 — Nov 2017',
+        'exp-2-desc': 'Spezialisierte medizinische Vertretung im Pharmasektor, die Verbindungen zwischen der akademischen Einrichtung und der Industrie zur Ausbildung von Fachkräften in medizinischer Visitation und kommerziellem Management herstellt.',
+        'edu-title': 'Bildung',
+        'edu-1-status': '(in Bearbeitung)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Spezialisierung in analytischer Programmierung und Datenbankmanipulation mit Python und SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mär 2017 — Nov 2017',
+        'edu-2-desc': 'Ausbildung in medizinischer Vertretung, Pharmamarketing und kommerziellem Management.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Ausbildung in biomedizinischen Wissenschaften mit Schwerpunkt auf Pharmakovigilanz und Patientenversorgung.',
+        'skills-title': 'Fähigkeiten',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Pharmakovigilanz',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Datenanalyse',
+        'skill-crm': 'CRM & Prospektion',
+        'skill-communication': 'Globale Kommunikation',
+        'skill-planning': 'Operative Planung',
+        'lang-title': 'Sprachen',
+        'lang-es': 'Spanisch',
+        'lang-es-level': 'Muttersprache',
+        'lang-en': 'Englisch',
+        'lang-en-level': 'Fließend',
+        'lang-de': 'Deutsch',
+        'lang-de-level': 'Grundkenntnisse (A1–A2)',
+        'spec-title': 'Spezialisierungen & Kurse',
+        'proj-title': 'Projekte',
+        'proj-1-title': 'Cardiovascular Risk Prediction',
+        'proj-1-desc': 'Machine learning model to predict cardiovascular disease from clinical and lifestyle variables. Interactive dashboard with Streamlit deployed from GitHub.',
+        'proj-2-title': 'API Consumption with Python',
+        'proj-2-desc': 'Interactive notebook consuming the USGS Earthquake API, processing GeoJSON data into pandas DataFrames, with exploratory analysis and visualizations. Includes custom API client and error handling.',
+        'contact-title': 'Contact',
+        'contact-location': 'Germany',
+        'footer-text': 'Made with ♥',
+        'repos-heading': 'More repositories'
+      },
+      de: {
+        'header-subtitle': 'Datenanalystin',
+        'perfil-title': 'Berufliches Profil',
+        'perfil-text': 'Internationale Gesundheits- und Pharmafachkraft mit Sitz in Frankfurt, spezialisiert auf kommerzielles Management, Marktanalyse und Key Account Management (KAM). Solide biomedizinische Grundlage mit Fokus auf Pharmakovigilanz, Kundenbindung und personalisierte Betreuung. Derzeit Vertiefung in Angewandter Datenwissenschaft — mit Python und SQL — um datengestützte strategische Entscheidungen im europäischen Biotechnologie-Ökosystem voranzutreiben.',
+        'exp-title': 'Berufserfahrung',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Jan 2015 — Okt 2017',
+        'exp-1-desc': 'Key Account Management: strategische Planung, Geschäftsakquise und Aufbau vertrauensvoller Beziehungen zu Fachärzten für Plastische Chirurgie, Pädiatrie und Neurologie. Technische Zusammenarbeit mit Neurologen zur Sicherheitsüberwachung und Pharmakovigilanz von Blastoferon (Multiple-Sklerose-Behandlung). Leitung personalisierter Patientenschulungsprogramme für den korrekten Umgang mit biologischen Medikamentenkits. Verwaltung, Analyse und Integration von Transaktionsdaten wichtiger Kunden in CRM-Plattformen zur Minderung kommerzieller Risiken.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mär 2017 — Nov 2017',
+        'exp-2-desc': 'Spezialisierte medizinische Vertretung im Pharmasektor, die Verbindungen zwischen der akademischen Einrichtung und der Industrie zur Ausbildung von Fachkräften in medizinischer Visitation und kommerziellem Management herstellt.',
+        'edu-title': 'Bildung',
+        'edu-1-status': '(in Bearbeitung)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Spezialisierung in analytischer Programmierung und Datenbankmanipulation mit Python und SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mär 2017 — Nov 2017',
+        'edu-2-desc': 'Ausbildung in medizinischer Vertretung, Pharmamarketing und kommerziellem Management.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Ausbildung in biomedizinischen Wissenschaften mit Schwerpunkt auf Pharmakovigilanz und Patientenversorgung.',
+        'skills-title': 'Fähigkeiten',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Pharmakovigilanz',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Datenanalyse',
+        'skill-crm': 'CRM & Prospektion',
+        'skill-communication': 'Globale Kommunikation',
+        'skill-planning': 'Operative Planung',
+        'lang-title': 'Sprachen',
+        'lang-es': 'Spanisch',
+        'lang-es-level': 'Muttersprache',
+        'lang-en': 'Englisch',
+        'lang-en-level': 'Fließend',
+        'lang-de': 'Deutsch',
+        'lang-de-level': 'Grundkenntnisse (A1–A2)',
+        'spec-title': 'Spezialisierungen & Kurse',
+        'proj-title': 'Projekte',
+        'proj-1-title': 'Cardiovascular Risk Prediction',
+        'proj-1-desc': 'Machine learning model to predict cardiovascular disease from clinical and lifestyle variables. Interactive dashboard with Streamlit deployed from GitHub.',
+        'proj-2-title': 'API Consumption with Python',
+        'proj-2-desc': 'Interactive notebook consuming the USGS Earthquake API, processing GeoJSON data into pandas DataFrames, with exploratory analysis and visualizations. Includes custom API client and error handling.',
+        'contact-title': 'Contact',
+        'contact-location': 'Germany',
+        'footer-text': 'Made with ♥',
+        'repos-heading': 'More repositories'
+      },
+      de: {
+        'header-subtitle': 'Datenanalystin',
+        'perfil-title': 'Berufliches Profil',
+        'perfil-text': 'Internationale Gesundheits- und Pharmafachkraft mit Sitz in Frankfurt, spezialisiert auf kommerzielles Management, Marktanalyse und Key Account Management (KAM). Solide biomedizinische Grundlage mit Fokus auf Pharmakovigilanz, Kundenbindung und personalisierte Betreuung. Derzeit Vertiefung in Angewandter Datenwissenschaft — mit Python und SQL — um datengestützte strategische Entscheidungen im europäischen Biotechnologie-Ökosystem voranzutreiben.',
+        'exp-title': 'Berufserfahrung',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Jan 2015 — Okt 2017',
+        'exp-1-desc': 'Key Account Management: strategische Planung, Geschäftsakquise und Aufbau vertrauensvoller Beziehungen zu Fachärzten für Plastische Chirurgie, Pädiatrie und Neurologie. Technische Zusammenarbeit mit Neurologen zur Sicherheitsüberwachung und Pharmakovigilanz von Blastoferon (Multiple-Sklerose-Behandlung). Leitung personalisierter Patientenschulungsprogramme für den korrekten Umgang mit biologischen Medikamentenkits. Verwaltung, Analyse und Integration von Transaktionsdaten wichtiger Kunden in CRM-Plattformen zur Minderung kommerzieller Risiken.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mär 2017 — Nov 2017',
+        'exp-2-desc': 'Spezialisierte medizinische Vertretung im Pharmasektor, die Verbindungen zwischen der akademischen Einrichtung und der Industrie zur Ausbildung von Fachkräften in medizinischer Visitation und kommerziellem Management herstellt.',
+        'edu-title': 'Bildung',
+        'edu-1-status': '(in Bearbeitung)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Spezialisierung in analytischer Programmierung und Datenbankmanipulation mit Python und SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mär 2017 — Nov 2017',
+        'edu-2-desc': 'Ausbildung in medizinischer Vertretung, Pharmamarketing und kommerziellem Management.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Ausbildung in biomedizinischen Wissenschaften mit Schwerpunkt auf Pharmakovigilanz und Patientenversorgung.',
+        'skills-title': 'Fähigkeiten',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Pharmakovigilanz',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Datenanalyse',
+        'skill-crm': 'CRM & Prospektion',
+        'skill-communication': 'Globale Kommunikation',
+        'skill-planning': 'Operative Planung',
+        'lang-title': 'Sprachen',
+        'lang-es': 'Spanisch',
+        'lang-es-level': 'Muttersprache',
+        'lang-en': 'Englisch',
+        'lang-en-level': 'Fließend',
+        'lang-de': 'Deutsch',
+        'lang-de-level': 'Grundkenntnisse (A1–A2)',
+        'spec-title': 'Spezialisierungen & Kurse',
+        'proj-title': 'Projekte',
+        'proj-1-title': 'Cardiovascular Risk Prediction',
+        'proj-1-desc': 'Machine learning model to predict cardiovascular disease from clinical and lifestyle variables. Interactive dashboard with Streamlit deployed from GitHub.',
+        'proj-2-title': 'API Consumption with Python',
+        'proj-2-desc': 'Interactive notebook consuming the USGS Earthquake API, processing GeoJSON data into pandas DataFrames, with exploratory analysis and visualizations. Includes custom API client and error handling.',
+        'contact-title': 'Contact',
+        'contact-location': 'Germany',
+        'footer-text': 'Made with ♥',
+        'repos-heading': 'More repositories'
+      },
+      de: {
+        'header-subtitle': 'Datenanalystin',
+        'perfil-title': 'Berufliches Profil',
+        'perfil-text': 'Internationale Gesundheits- und Pharmafachkraft mit Sitz in Frankfurt, spezialisiert auf kommerzielles Management, Marktanalyse und Key Account Management (KAM). Solide biomedizinische Grundlage mit Fokus auf Pharmakovigilanz, Kundenbindung und personalisierte Betreuung. Derzeit Vertiefung in Angewandter Datenwissenschaft — mit Python und SQL — um datengestützte strategische Entscheidungen im europäischen Biotechnologie-Ökosystem voranzutreiben.',
+        'exp-title': 'Berufserfahrung',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Jan 2015 — Okt 2017',
+        'exp-1-desc': 'Key Account Management: strategische Planung, Geschäftsakquise und Aufbau vertrauensvoller Beziehungen zu Fachärzten für Plastische Chirurgie, Pädiatrie und Neurologie. Technische Zusammenarbeit mit Neurologen zur Sicherheitsüberwachung und Pharmakovigilanz von Blastoferon (Multiple-Sklerose-Behandlung). Leitung personalisierter Patientenschulungsprogramme für den korrekten Umgang mit biologischen Medikamentenkits. Verwaltung, Analyse und Integration von Transaktionsdaten wichtiger Kunden in CRM-Plattformen zur Minderung kommerzieller Risiken.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mär 2017 — Nov 2017',
+        'exp-2-desc': 'Spezialisierte medizinische Vertretung im Pharmasektor, die Verbindungen zwischen der akademischen Einrichtung und der Industrie zur Ausbildung von Fachkräften in medizinischer Visitation und kommerziellem Management herstellt.',
+        'edu-title': 'Bildung',
+        'edu-1-status': '(in Bearbeitung)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Spezialisierung in analytischer Programmierung und Datenbankmanipulation mit Python und SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mär 2017 — Nov 2017',
+        'edu-2-desc': 'Ausbildung in medizinischer Vertretung, Pharmamarketing und kommerziellem Management.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Ausbildung in biomedizinischen Wissenschaften mit Schwerpunkt auf Pharmakovigilanz und Patientenversorgung.',
+        'skills-title': 'Fähigkeiten',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Pharmakovigilanz',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Datenanalyse',
+        'skill-crm': 'CRM & Prospektion',
+        'skill-communication': 'Globale Kommunikation',
+        'skill-planning': 'Operative Planung',
+        'lang-title': 'Sprachen',
+        'lang-es': 'Spanisch',
+        'lang-es-level': 'Muttersprache',
+        'lang-en': 'Englisch',
+        'lang-en-level': 'Fließend',
+        'lang-de': 'Deutsch',
+        'lang-de-level': 'Grundkenntnisse (A1–A2)',
+        'spec-title': 'Spezialisierungen & Kurse',
+        'proj-title': 'Projekte',
+        'proj-1-title': 'Cardiovascular Risk Prediction',
+        'proj-1-desc': 'Machine learning model to predict cardiovascular disease from clinical and lifestyle variables. Interactive dashboard with Streamlit deployed from GitHub.',
+        'proj-2-title': 'API Consumption with Python',
+        'proj-2-desc': 'Interactive notebook consuming the USGS Earthquake API, processing GeoJSON data into pandas DataFrames, with exploratory analysis and visualizations. Includes custom API client and error handling.',
+        'contact-title': 'Contact',
+        'contact-location': 'Germany',
+        'footer-text': 'Made with ♥',
+        'repos-heading': 'More repositories'
+      },
+      de: {
+        'header-subtitle': 'Datenanalystin',
+        'perfil-title': 'Berufliches Profil',
+        'perfil-text': 'Internationale Gesundheits- und Pharmafachkraft mit Sitz in Frankfurt, spezialisiert auf kommerzielles Management, Marktanalyse und Key Account Management (KAM). Solide biomedizinische Grundlage mit Fokus auf Pharmakovigilanz, Kundenbindung und personalisierte Betreuung. Derzeit Vertiefung in Angewandter Datenwissenschaft — mit Python und SQL — um datengestützte strategische Entscheidungen im europäischen Biotechnologie-Ökosystem voranzutreiben.',
+        'exp-title': 'Berufserfahrung',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Jan 2015 — Okt 2017',
+        'exp-1-desc': 'Key Account Management: strategische Planung, Geschäftsakquise und Aufbau vertrauensvoller Beziehungen zu Fachärzten für Plastische Chirurgie, Pädiatrie und Neurologie. Technische Zusammenarbeit mit Neurologen zur Sicherheitsüberwachung und Pharmakovigilanz von Blastoferon (Multiple-Sklerose-Behandlung). Leitung personalisierter Patientenschulungsprogramme für den korrekten Umgang mit biologischen Medikamentenkits. Verwaltung, Analyse und Integration von Transaktionsdaten wichtiger Kunden in CRM-Plattformen zur Minderung kommerzieller Risiken.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mär 2017 — Nov 2017',
+        'exp-2-desc': 'Spezialisierte medizinische Vertretung im Pharmasektor, die Verbindungen zwischen der akademischen Einrichtung und der Industrie zur Ausbildung von Fachkräften in medizinischer Visitation und kommerziellem Management herstellt.',
+        'edu-title': 'Bildung',
+        'edu-1-status': '(in Bearbeitung)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Spezialisierung in analytischer Programmierung und Datenbankmanipulation mit Python und SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mär 2017 — Nov 2017',
+        'edu-2-desc': 'Ausbildung in medizinischer Vertretung, Pharmamarketing und kommerziellem Management.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Ausbildung in biomedizinischen Wissenschaften mit Schwerpunkt auf Pharmakovigilanz und Patientenversorgung.',
+        'skills-title': 'Fähigkeiten',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Pharmakovigilanz',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Datenanalyse',
+        'skill-crm': 'CRM & Prospektion',
+        'skill-communication': 'Globale Kommunikation',
+        'skill-planning': 'Operative Planung',
+        'lang-title': 'Sprachen',
+        'lang-es': 'Spanisch',
+        'lang-es-level': 'Muttersprache',
+        'lang-en': 'Englisch',
+        'lang-en-level': 'Fließend',
+        'lang-de': 'Deutsch',
+        'lang-de-level': 'Grundkenntnisse (A1–A2)',
+        'spec-title': 'Spezialisierungen & Kurse',
+        'proj-title': 'Projekte',
+        'proj-1-title': 'Cardiovascular Risk Prediction',
+        'proj-1-desc': 'Machine learning model to predict cardiovascular disease from clinical and lifestyle variables. Interactive dashboard with Streamlit deployed from GitHub.',
+        'proj-2-title': 'API Consumption with Python',
+        'proj-2-desc': 'Interactive notebook consuming the USGS Earthquake API, processing GeoJSON data into pandas DataFrames, with exploratory analysis and visualizations. Includes custom API client and error handling.',
+        'contact-title': 'Contact',
+        'contact-location': 'Germany',
+        'footer-text': 'Made with ♥',
+        'repos-heading': 'More repositories'
+      },
+      fr: {
+        'header-subtitle': 'Analyste de données',
+        'perfil-title': 'Profil Professionnel',
+        'perfil-text': 'Professionnelle internationale de la santé et de l\'industrie pharmaceutique basée à Francfort, spécialisée en gestion commerciale, analyse de marché et key account management (KAM). Solide formation biomédicale axée sur les processus de pharmacovigilance, la fidélisation des clients et les soins personnalisés. Actuellement en approfondissement en Science des Données Appliquée — avec Python et SQL — pour impulser des décisions stratégiques basées sur les données au sein de l\'écosystème biotechnologique européen.',
+        'exp-title': 'Expérience Professionnelle',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Jan 2015 — Oct 2017',
+        'exp-1-desc': 'Gestion de comptes clés (KAM) : planification stratégique, prospection commerciale et établissement de relations de confiance avec des spécialistes en Chirurgie Plastique, Pédiatrie et Neurologie. Collaboration technique avec des neurologues pour la surveillance de sécurité et la pharmacovigilance de Blastoferon (traitement de la Sclérose en Plaques). Direction de programmes de formation personnalisée pour les patients sur la manipulation de kits de médicaments biologiques. Gestion, analyse et intégration de données transactionnelles de clients clés dans des plateformes CRM pour atténuer les risques commerciaux.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mar 2017 — Nov 2017',
+        'exp-2-desc': 'Représentation médicale spécialisée dans le secteur pharmaceutique, établissant des liens entre l\'institution académique et l\'industrie pour la formation de professionnels en visite médicale et gestion commerciale.',
+        'edu-title': 'Éducation',
+        'edu-1-status': '(en cours)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Spécialisation en programmation analytique et manipulation de bases de données avec Python et SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mar 2017 — Nov 2017',
+        'edu-2-desc': 'Formation en représentation médicale, marketing pharmaceutique et gestion commerciale.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Formation en sciences biomédicales axée sur la pharmacovigilance et les soins aux patients.',
+        'skills-title': 'Compétences',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Pharmacovigilance',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Analyse de Données',
+        'skill-crm': 'CRM & Prospection',
+        'skill-communication': 'Communication Globale',
+        'skill-planning': 'Planification Opérationnelle',
+        'lang-title': 'Langues',
+        'lang-es': 'Espagnol',
+        'lang-es-level': 'Natif',
+        'lang-en': 'Anglais',
+        'lang-en-level': 'Courant',
+        'lang-de': 'Allemand',
+        'lang-de-level': 'Débutant (A1–A2)',
+        'spec-title': 'Spécialisations & Cours',
+        'proj-title': 'Projets',
+        'proj-1-title': 'Prédiction du Risque Cardiovasculaire',
+        'proj-1-desc': 'Modèle de machine learning pour prédire les maladies cardiovasculaires à partir de variables cliniques et de mode de vie. Tableau de bord interactif avec Streamlit déployé depuis GitHub.',
+        'proj-2-title': 'Consommation d\'API avec Python',
+        'proj-2-desc': 'Notebook interactif consommant l\'API USGS Earthquake, traitant des données GeoJSON en DataFrames pandas, avec analyse exploratoire et visualisations. Inclut un client API personnalisé et la gestion des erreurs.',
+        'contact-title': 'Contact',
+        'contact-location': 'Allemagne',
+        'footer-text': 'Fait avec ♥',
+        'repos-heading': 'Plus de dépôts'
+      },
+      it: {
+        'header-subtitle': 'Analista di dati',
+        'perfil-title': 'Profilo Professionale',
+        'perfil-text': 'Professionista internazionale del settore sanitario e farmaceutico con sede a Francoforte, specializzata in gestione commerciale, analisi di mercato e key account management (KAM). Solida formazione biomedica orientata ai processi di farmacovigilanza, fidelizzazione dei clienti e assistenza personalizzata. Attualmente approfondisce la Scienza dei Dati Applicata — con Python e SQL — per guidare decisioni strategiche basate sui dati nell\'ecosistema biotecnologico europeo.',
+        'exp-title': 'Esperienza Professionale',
+        'exp-1-title': 'Specialized Medical Sales Representative',
+        'exp-1-meta': 'Laboratorios Pellier · Gen 2015 — Ott 2017',
+        'exp-1-desc': 'Gestione dei conti chiave (KAM): pianificazione strategica, prospezione commerciale e costruzione di relazioni di fiducia con specialisti in Chirurgia Plastica, Pediatria e Neurologia. Collaborazione tecnica con neurologi per il monitoraggio della sicurezza e la farmacovigilanza di Blastoferon (trattamento per la Sclerosi Multipla). Conduzione di programmi di formazione personalizzata per i pazienti sulla corretta gestione di kit di farmaci biologici. Gestione, analisi e integrazione di dati transazionali di clienti chiave in piattaforme CRM per mitigare il rischio commerciale.',
+        'exp-2-title': 'Professional Medical Representative',
+        'exp-2-meta': 'Universidad Católica del Uruguay · Mar 2017 — Nov 2017',
+        'exp-2-desc': 'Rappresentanza medica specializzata nel settore farmaceutico, creando collegamenti tra l\'istituzione accademica e l\'industria per la formazione di professionisti in visita medica e gestione commerciale.',
+        'edu-title': 'Istruzione',
+        'edu-1-status': '(in corso)',
+        'edu-1-meta': 'Universitat Oberta de Catalunya (UOC)',
+        'edu-1-desc': 'Specializzazione in programmazione analitica e manipolazione di database con Python e SQL.',
+        'edu-2-title': 'Professional Medical Representative',
+        'edu-2-meta': 'Universidad Católica del Uruguay (UCU) · Mar 2017 — Nov 2017',
+        'edu-2-desc': 'Formazione in rappresentanza medica, marketing farmaceutico e gestione commerciale.',
+        'edu-3-title': 'Bachelor of Medicine (Coursework)',
+        'edu-3-meta': 'Universidad de la República (UdelaR) · 2012 — 2017',
+        'edu-3-desc': 'Formazione in scienze biomediche con focus su farmacovigilanza e cura del paziente.',
+        'skills-title': 'Competenze',
+        'skill-python': 'Python',
+        'skill-sql': 'SQL',
+        'skill-pharmacovigilance': 'Farmacovigilanza',
+        'skill-kam': 'Key Account Management',
+        'skill-data-analysis': 'Analisi dei Dati',
+        'skill-crm': 'CRM & Prospezione',
+        'skill-communication': 'Comunicazione Globale',
+        'skill-planning': 'Pianificazione Operativa',
+        'lang-title': 'Lingue',
+        'lang-es': 'Spagnolo',
+        'lang-es-level': 'Madrelingua',
+        'lang-en': 'Inglese',
+        'lang-en-level': 'Fluente',
+        'lang-de': 'Tedesco',
+        'lang-de-level': 'Base (A1–A2)',
+        'spec-title': 'Specializzazioni & Corsi',
+        'proj-title': 'Progetti',
+        'proj-1-title': 'Previsione del Rischio Cardiovascolare',
+        'proj-1-desc': 'Modello di machine learning per prevedere malattie cardiovascolari da variabili cliniche e di stile di vita. Dashboard interattivo con Streamlit distribuito da GitHub.',
+        'proj-2-title': 'Consumo di API con Python',
+        'proj-2-desc': 'Notebook interattivo che consuma l\'API USGS Earthquake, elabora dati GeoJSON in DataFrame pandas, con analisi esplorativa e visualizzazioni. Include client API personalizzato e gestione degli errori.',
+        'contact-title': 'Contatto',
+        'contact-location': 'Germania',
+        'footer-text': 'Fatto con ♥',
+        'repos-heading': 'Altri repository'
+      }
+    };
+
+    // ── Language switcher ──
+    var select = document.getElementById('lang-switcher');
+    if (select) {
+      var saved = localStorage.getItem('lang');
+      if (saved && t[saved]) { select.value = saved; }
+      else { select.value = 'es'; }
+
+      function setLanguage(lang) {
+        var tx = t[lang];
+        if (!tx) return;
+        var els = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          var key = el.getAttribute('data-i18n');
+          if (tx[key] !== undefined) {
+            if (el.tagName === 'A' && el.getAttribute('data-i18n') === key) {
+              el.textContent = tx[key];
+            } else {
+              el.textContent = tx[key];
+            }
+          }
+        }
+        document.documentElement.lang = lang === 'es' ? 'es' : lang === 'en' ? 'en' : lang === 'de' ? 'de' : lang === 'fr' ? 'fr' : 'it';
+        localStorage.setItem('lang', lang);
+      }
+
+      select.addEventListener('change', function() {
+        setLanguage(this.value);
+      });
+
+      setLanguage(select.value);
+    }
+
+  })();
+</script>
+
+</body>
+</html>
